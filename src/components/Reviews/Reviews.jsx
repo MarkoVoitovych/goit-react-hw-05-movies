@@ -17,17 +17,22 @@ function Reviews() {
     })();
   }, [movieId]);
   return (
-    <ul>
-      {reviews &&
-        reviews.map(({ author, content, id }) => {
-          return (
-            <li key={id}>
-              <p>Author: {author}</p>
-              <p>{content}</p>
-            </li>
-          );
-        })}
-    </ul>
+    <>
+      {reviews && reviews.length > 0 ? (
+        <ul>
+          {reviews.map(({ author, content, id }) => {
+            return (
+              <li key={id}>
+                <p>Author: {author}</p>
+                <p>{content}</p>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>We don't have any reviews for this movie.</p>
+      )}
+    </>
   );
 }
 

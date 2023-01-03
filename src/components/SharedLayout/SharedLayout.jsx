@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, StyledLink, Header, Nav } from './SharedLayout.styled';
 
@@ -10,7 +11,9 @@ function SharedLayout() {
           <StyledLink to="/movies">Movies</StyledLink>
         </Nav>
       </Header>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 }

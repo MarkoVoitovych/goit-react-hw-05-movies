@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getPopularMovies } from '../../utils/themoviedbAPI';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +24,9 @@ const Home = () => {
         {movies.map(movie => {
           return (
             <li key={movie.id}>
-              <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
+              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                {movie.title}
+              </Link>
             </li>
           );
         })}

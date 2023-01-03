@@ -18,22 +18,27 @@ function Cast() {
   }, [movieId]);
 
   return (
-    <ul>
-      {credits &&
-        credits.map(({ id, original_name, character, profile_path }) => {
-          return (
-            <li key={id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w300${profile_path}`}
-                alt={original_name}
-                height="100"
-              />
-              <p>{original_name}</p>
-              <p>Character: {character}</p>
-            </li>
-          );
-        })}
-    </ul>
+    <>
+      {credits && credits.length > 0 ? (
+        <ul>
+          {credits.map(({ id, original_name, character, profile_path }) => {
+            return (
+              <li key={id}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+                  alt={original_name}
+                  height="100"
+                />
+                <p>{original_name}</p>
+                <p>Character: {character}</p>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>We don't have any information about casts for this movie.</p>
+      )}
+    </>
   );
 }
 
