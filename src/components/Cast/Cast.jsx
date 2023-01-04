@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { RxDotFilled } from 'react-icons/rx';
 import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'utils/themoviedbAPI';
+import { Item, List, Photo, Text } from './Cast.styled';
 
 function Cast() {
   const { movieId } = useParams();
@@ -20,21 +22,26 @@ function Cast() {
   return (
     <>
       {credits && credits.length > 0 ? (
-        <ul>
+        <List>
           {credits.map(({ id, original_name, character, profile_path }) => {
             return (
-              <li key={id}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+              <Item key={id}>
+                <Photo
+                  src={`https://image.tmdb.org/t/p/w200${profile_path}`}
                   alt={original_name}
                   height="100"
                 />
-                <p>{original_name}</p>
-                <p>Character: {character}</p>
-              </li>
+                <div>
+                  <Text>
+                    <RxDotFilled />
+                    {original_name}
+                  </Text>
+                  <Text>Character: {character}</Text>
+                </div>
+              </Item>
             );
           })}
-        </ul>
+        </List>
       ) : (
         <p>We don't have any information about casts for this movie.</p>
       )}

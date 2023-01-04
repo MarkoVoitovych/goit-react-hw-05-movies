@@ -1,6 +1,19 @@
 import { useEffect, useState, useRef, Suspense } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { getMovieById } from 'utils/themoviedbAPI';
+import {
+  FilmTitle,
+  GoBackLink,
+  InfoList,
+  InfoThumb,
+  InfoTitle,
+  Poster,
+  StyledLink,
+  Text,
+  TextTitle,
+  Wrapper,
+} from './MovieDetails.styled';
 
 function MovieDetails() {
   const { movieId } = useParams();
@@ -27,31 +40,35 @@ function MovieDetails() {
 
   return (
     <>
-      <Link to={backLink.current}>Go back</Link>
+      <GoBackLink to={backLink.current}>
+        {' '}
+        <AiOutlineArrowLeft />
+        <span>Go back</span>
+      </GoBackLink>
       {movie && (
-        <div>
-          <img src={posterPath} alt={movie.title} height="300" />
-          <div>
-            <h3>
+        <Wrapper>
+          <Poster src={posterPath} alt={movie.title} height="200" />
+          <InfoThumb>
+            <FilmTitle>
               {movie.title} ({releaseYear})
-            </h3>
-            <p>User Score: {userScore}%</p>
-            <p>Overview</p>
-            <p>{movie.overview}</p>
-            <p>Genges</p>
-            <p>{genres}</p>
-          </div>
-        </div>
+            </FilmTitle>
+            <Text>User Score: {userScore}%</Text>
+            <TextTitle>Overview</TextTitle>
+            <Text>{movie.overview}</Text>
+            <TextTitle>Genges</TextTitle>
+            <Text>{genres}</Text>
+          </InfoThumb>
+        </Wrapper>
       )}
-      <p>Additional information</p>
-      <ul>
+      <InfoTitle>Additional information</InfoTitle>
+      <InfoList>
         <li>
-          <Link to="cast">Cast</Link>
+          <StyledLink to="cast">Cast</StyledLink>
         </li>
         <li>
-          <Link to="reviews">Reviews</Link>
+          <StyledLink to="reviews">Reviews</StyledLink>
         </li>
-      </ul>
+      </InfoList>
       <Suspense>
         <Outlet />
       </Suspense>
