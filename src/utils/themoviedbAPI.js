@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 axios.defaults.params = {
-  api_key: '663bd5fd8d905b7ce2d57e9867d3492e',
+  api_key: process.env.REACT_APP_MOVIE_API_KEY,
 };
 
 export const getPopularMovies = async (page = 1) => {
